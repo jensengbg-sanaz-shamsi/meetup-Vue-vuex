@@ -1,32 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+    <router-link to="/signUp">Sign up</router-link>
+
+  <router-view :events="allEvents"/>
+
   </div>
+
 </template>
+
+<script>
+export default {
+  name: "App",
+    data: () => ({
+    events: {},
+  }),
+  computed: {
+    allEvents() {
+      return this.$store.state.events;
+    }
+  },
+  beforeMount() {
+    this.$store.dispatch("fetchEvents");
+  }
+}
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background-color: #ccc;
+  width: 100%;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
