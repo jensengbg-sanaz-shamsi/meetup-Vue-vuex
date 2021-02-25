@@ -6,16 +6,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiUrl: "https://api.jsonbin.io/b/60340c850866664b108169fc/1",
+    apiUrl: "https://api.jsonbin.io/b/60379342f1be644b0a64db41",
     apiKey: "$2b$10$bKxupXCPzLuxYxBKsGZgx.v0iV82j039iZOI9bmNh.CjjQiiVxQEi",
-    events: {
-      type: Array,
-      default: []
-    },
-    user: {},
-    reviews: Array,
+    events: Array,
     filteredEvents: Array,
-    filter: ''
+    filter: {
+      search: ''
+    }
   },
   mutations: {
     showEvents(state, data) {
@@ -24,11 +21,12 @@ export default new Vuex.Store({
 
     displayFilterSearch(state, data) {
       state.filteredEvents = data
+      state.filter.search = data
     },
   },
   actions: { 
     //get events from api
-    async fetchEvents(ctx) {
+    fetchEvents(ctx) {
       let options = {
         headers: {
           "Content-Type": "application/json",
@@ -36,16 +34,15 @@ export default new Vuex.Store({
           "X-Bin-Versioning": "false"
         }
       }
-      let event = await ax.get(`${ctx.state.apiUrl}`, {
-        events: ctx.state.events
-      }, options)
-      ctx.commit('showEvents', event.data.events)
+      ax.get(`${ctx.state.apiUrl}`, options).then(data => {
+        ctx.commit('showEvents', data.data.events)
+      })
 
     },
     
-    async filteSearch(ctx, search) {
-      await ctx.commit('setFilterSearch', search)
-      ctx.dispatch('searchFilter')
+    async filterSearch(ctx, search) {
+      await ctx.commit('displayFilterSearch', search)
+      ctx.dispatch['filteredList']
     },
 
     //send user information to backend
@@ -57,7 +54,6 @@ export default new Vuex.Store({
           "X-Bin-Versioning": "false"
         }
       }
-      console.log(value, 'this is value')
       try {
         let data = await ax.put(`${ctx.state.apiUrl}`, {
           events: ctx.state.events,
@@ -91,9 +87,25 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    events(state) {
-      return state.events
-    }
+    filteredList(ctx) {
+      if (
+        ctx.filter.search == "" ||
+        ctx.filter.search === undefined ||
+        ctx.filter.search === null
+        ) {
+        ctx.filteredEvents = ctx.events
+      } else {
+        ctx.filteredEvents = ctx.events.filter((event) => {
+          return event.name.toLowerCase().includes(ctx.filter.search.toLowerCase());
+        })
+      }
+      return ctx.filteredEvents
+    },
+    chosenEvent(state) {
+      return (eventId) => {
+        return state.events.find((event) => event.id == eventId)
+      }
+    },
   },
   modules: {
   },

@@ -1,16 +1,23 @@
 <template>
-<main>
+<main id="signup">
     <section v-show="registeringForm">
         <h3>Register for this event:</h3>
         <label for="email">Email:</label>
-        <input type="text" placeholder="email" v-model="inputValue.email">
+        <input type="text" placeholder="email" v-model="inputValue.email" class="input">
         <label for="name">Name:</label>
-        <input type="text" v-model="inputValue.name" placeholder="name">
-        <button @click="register" :disabled="!isDisabled">Join</button>
+        <input type="text" v-model="inputValue.name" placeholder="name" class="input">
+        <button @click="register" :disabled="isDisabled" class="join">Join</button>
     </section>
 
-    <section v-show="confirmation">
-        <h3>You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
+    <section v-show="confirmation" class="confirmationtext">
+        <div v-show="feedback">
+            <h3>You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
+            <p>P.S. we would appreciate if you put your opinion about this event later!</p>
+            <textarea name="" id="" cols="50" rows="10" v-model="inputValue.comment">
+            </textarea>
+            <button @click="post" class="post">send</button>
+        </div>
+        <h3 v-show="thanksMsg" class="msg">Thank you for your feedback!</h3>
     </section>
 </main>
 
@@ -21,26 +28,55 @@
 
 export default {
     name: "SignUp",
+    props: {
+        event: Object
+    },
     data() {
         return {
             registeringForm: true,
             confirmation: false,
+            disabled: true,
+            feedback: true,
+            thanksMsg: false,
             inputValue: {
                 email: "",
-                username: ""
+                username: "",
+                comment: ""
             }
         }
     },
     methods: {
         register() {
-            const data = {
-                username: this.inputValue.username,
-                email: this.inputValue.email
+            if (this.inputValue.name >= 0) {
+                alert("You need to type in your name");
+            } else if (this.inputValue.email >= 0) {
+                alert("You need to type in your email");
+            } else {
+                this.confirmation = true;
+                this.registeringForm = false;
+                this.clearTextbox();
             }
-            this.$store.dispatch('sendUser', data)
-            this.registeringForm = false
-            this.confirmation = true
-        }
+        },
+        post() {
+            this.thanksMsg = true
+            if (this.inputValue.comment >= 0) {
+                alert("You have not written a comment");
+            } else {
+                let newComment = this.event.reviews;
+                newComment.push(this.inputValue);
+                //this.$store.dispatch("postCommentToBackend", newComment);
+                this.clearTextbox();
+                this.feedback = false
+            }
+        },
+        clearTextbox() {
+            let newText = {
+                email: "",
+                comment: ""
+            }
+            this.inputValue = newText
+            return this.inputValue
+            }
     },
     computed: {
         isDisabled() {
@@ -58,19 +94,15 @@ export default {
 </script>
 
 <style scoped>
-    * {
+    #signup {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-
-    main {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        margin: 2rem;
-    }
-    input {
+    .input {
         padding: 0.5rem;
         margin: 0.5rem;
         border: rgba(71, 66, 66, 0.507) solid 1px;
@@ -83,5 +115,10 @@ export default {
     }
     button:hover {
         cursor: pointer;
+    }
+
+    textarea {
+        width: 150px;
+        height: 60px;
     }
 </style>

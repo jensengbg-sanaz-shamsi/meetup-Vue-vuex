@@ -31,8 +31,7 @@ export default {
     name: "AllMeetings",
     data() {
         return {
-            search: '',
-            filteredList: Array
+            search: ''
         }
     },
     components: {
@@ -40,7 +39,7 @@ export default {
     },
     methods: {
         filter() {
-            if (
+            /*if (
                 this.search == "undefined" ||
                 this.search == null ||
                 this.search == ""
@@ -51,14 +50,15 @@ export default {
                 this.filteredList = this.$store.state.events.filter((event) => {
                     return event.name.toLowerCase().includes(this.search.toLowerCase());
                 });
-            }
+            }*/
+            this.$store.dispatch('filterSearch',  this.search)
         }
     },
-    /* computed: {
-        allMeetings() {
-            return this.$store.getters.events;
+    computed: {
+        filteredList() {
+            return this.$store.getters['filteredList']
         }
-    },*/
+    },
     beforeMount() {
         this.filter()
     }

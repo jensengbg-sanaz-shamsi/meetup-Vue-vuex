@@ -1,9 +1,9 @@
 <template>
     <main id="eventInfo">
 
-        <section>
+        <section class="info">
             <div class="detail">
-                <div>
+                <div class="details">
                     <img :src="event.imgUrl" alt="bild" class="img"/>
                     <h1 class="title">{{ event.name }}</h1>
                     <h5>Location: {{ event.location }}</h5>
@@ -11,13 +11,13 @@
                     <h5>time: {{ event.timeIn }} - {{ event.timeOut }}</h5>
                     <h5>Price: {{ event.price }}</h5>
                 </div>
-                <div>
+                <div class="about">
                     <h2>About this event:</h2>
                     <p>{{ event.discription }}</p>
                 </div>
             </div>
-            <SignUp />
-            <Reviews v-for="review of event.reviews" :key="review.name" :review="review" />
+            <SignUp :event="event"/>
+            <Reviews v-for="review of event.reviews" :key="review.email" :review="review" />
         </section>
 
         <footer>
@@ -33,15 +33,12 @@
 import SignUp from '../components/SignUp'
 import Reviews from '../components/Reviews'
 export default {
-    props: {
-        events: Array
-    },
     components: {
         SignUp,
         Reviews
     },
     computed: {
-        event() {
+        /*event() {
             let eventInfo = {
                 name: this.infoChosen ? this.infoChosen.name : "No title available",
                 imgUrl: this.infoChosen ? this.infoChosen.imgUrl : "No image available",
@@ -58,18 +55,21 @@ export default {
             } else {
                 return null;
             }
-        }
+        }*/
+        event() {
+            return this.$store.getters.chosenEvent(this.$route.params.id)
+        },
     },
 };
 </script>
 <style scoped>
-* {
-    margin: 5px ;
+#eventInfo {
+    margin: 5px;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-section {
+.info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,7 +77,7 @@ section {
     height: 400px;
     border: 1px solid rgba(134, 209, 209, 0.329);
     box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
-    background-color: #fddddd8a;
+    background-color: #ece3e3;
     width: 600px;
     margin: 20px auto;
 }
@@ -85,6 +85,18 @@ section {
 .detail {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.details {
+    position: absolute;
+}
+
+.about {
+    position: absolute;
+    left: 300px;
 }
 
 
@@ -108,6 +120,5 @@ h2 {
 p {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 
 </style>
