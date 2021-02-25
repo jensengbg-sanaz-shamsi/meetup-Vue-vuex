@@ -28,7 +28,6 @@ export default {
 
 <style>
 #app {
-  background-color: #ccc;
   width: 100%;
 }
 

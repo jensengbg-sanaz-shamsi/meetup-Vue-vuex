@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section id="comments">
         <h3>From: {{ reviews.email }}</h3>
         <h4>{{ reviews.comment }}</h4>
     </section>
@@ -23,12 +23,16 @@ export default {
 </script>
 
 <style scoped>
-    div {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        margin: 2rem;
-        border: rgba(58, 55, 55, 0.521) solid 0.7px;
-        padding: 1rem;
+    #comments {
+        height: 100px;
+        border: 1px solid rgba(134, 209, 209, 0.329);
+        box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
+        background-color: #ece3e3;
+        width: 600px;
+        margin: 20px auto;
+    }
+
+    h3, h4 {
+        margin-left: 20px;
     }
 </style>

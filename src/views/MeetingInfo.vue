@@ -70,11 +70,7 @@ export default {
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    height: 400px;
+    height: 300px;
     border: 1px solid rgba(134, 209, 209, 0.329);
     box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
     background-color: #ece3e3;
@@ -92,6 +88,11 @@ export default {
 
 .details {
     position: absolute;
+    margin: 0;
+}
+
+h1, h5 {
+    margin: 5px 15px;
 }
 
 .about {
@@ -106,6 +107,7 @@ h5 {
 .img {
     width: 250px;
     height: 150px;
+    margin: 20px 10px
 }
 .title {
     color: rgb(114, 13, 13);

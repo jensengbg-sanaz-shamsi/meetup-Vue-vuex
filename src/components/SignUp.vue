@@ -1,10 +1,10 @@
 <template>
 <main id="signup">
-    <section v-show="registeringForm">
+    <section v-show="registeringForm" class="form">
         <h3>Register for this event:</h3>
-        <label for="email">Email:</label>
+        <label for="email"></label>
         <input type="text" placeholder="email" v-model="inputValue.email" class="input">
-        <label for="name">Name:</label>
+        <label for="name"></label>
         <input type="text" v-model="inputValue.name" placeholder="name" class="input">
         <button @click="register" :disabled="isDisabled" class="join">Join</button>
     </section>
@@ -102,9 +102,23 @@ export default {
         padding: 0;
         box-sizing: border-box;
     }
+
+    .form, .confirmationtext {
+        height: 120px;
+        border: 1px solid rgba(134, 209, 209, 0.329);
+        box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
+        background-color: #ece3e3;
+        width: 600px;
+        margin: 20px auto;
+    }
+
+    .confirmationtext {
+        height: 350px;
+    } 
+
     .input {
         padding: 0.5rem;
-        margin: 0.5rem;
+        margin: 20px;
         border: rgba(71, 66, 66, 0.507) solid 1px;
         border-radius: 3px;
     }
@@ -117,8 +131,13 @@ export default {
         cursor: pointer;
     }
 
+    h3, p {
+        margin-left: 20px;
+    }
+
     textarea {
-        width: 150px;
-        height: 60px;
+        width: 400px;
+        height: 200px;
+        margin-left: 20px ;
     }
 </style>
