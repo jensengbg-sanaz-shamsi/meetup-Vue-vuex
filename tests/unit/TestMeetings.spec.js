@@ -4,11 +4,26 @@ import VueRouter from 'vue-router'
 import Meetings from '@/components/Meetings.vue'
 import Index from '@/store/index.js'
 
+
+const localVue = createLocalVue()
+localVue.use(Vuex)
+
 describe('Meetings.vue', () => {
+
+    let actions
+    let store
+
+    beforeEach(() => {
+        actions = {
+            actionClick: jest.fn(),
+            actionInput: jest.fn()
+        }
+        store = new Vuex.Store({
+            actions
+        })
+    })
+
     it('should display all events and the events title from store when mounted', () => {
-        const localVue = createLocalVue()
-        localVue.use(Vuex)
-        const store = new Vuex.Store(Index)
 
         const wrapper = shallowMount(Meetings, {
             propsData: {

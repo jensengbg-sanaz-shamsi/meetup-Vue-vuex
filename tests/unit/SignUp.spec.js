@@ -1,7 +1,8 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import SignUp from '@/components/SignUp.vue'
 import Vuex from 'vuex'
 import Index from '@/store/index.js'
+
 
 
 const localVue = createLocalVue()
@@ -9,6 +10,57 @@ localVue.use(Vuex)
 window.alert = jest.fn();
 
 describe('SignUp.vue', () => {
+
+    let actions
+    let store
+
+    beforeEach(() => {
+        actions = {
+            actionClick: jest.fn(),
+            actionInput: jest.fn()
+        }
+        store = new Vuex.Store({
+            actions
+        })
+    })
+
+    it('should show confirmationMSG when button is clicked', async () => {
+
+        const wrapper = shallowMount(SignUp)
+        let joinBtn = wrapper.find('.join')
+        await joinBtn.trigger('click')
+        
+        let confirmation = wrapper.find('.confirmationtext')
+        let confirmationText = wrapper.find('.msg').text()
+        let expectedText = 'You are registered for this event! We will send a confirmation and more details in your email adrdress!'
+        
+        expect(confirmation).toBeTruthy()
+        expect(confirmationText).toBeTruthy()
+        expect(confirmationText).toBe(expectedText)
+    })
+
+    /*it('click submit should not work when inputs are empty', async () => {
+       // const spySubmit = jest.spyOn(SignUp.methods, 'submit')
+        const wrapper = mount(SignUp, {
+            propsData: {
+                event: {
+                    "id": 1
+                }
+            },
+        })
+        const spySubmit = jest.spyOn(wrapper.vm, 'submit')
+        const emailInput = wrapper.find('.mailInput')
+        const userInput = wrapper.find('.nameInput')
+
+        let submitBtn = wrapper.find('.join')
+        
+        await submitBtn.trigger('click')
+        expect(emailInput.length).toBe(undefined)
+        expect(userInput.length).toBe(undefined)
+        expect(spySubmit).toBeCalledTimes(0)
+    })*/
+
+})
     /*it('Should search after input in inputfield', () => {
         const filter = jest.spyOn(SignUp.methods, 'filter');
 
@@ -24,20 +76,9 @@ describe('SignUp.vue', () => {
         expect(wrapper.vm.$data.filteredList.length).toBe(1);
     })*/
 
-    
-    let actions
-    let store
-
-    beforeEach(() => {
-        actions = {
-            actionClick: jest.fn(),
-            actionInput: jest.fn()
-        }
-        store = new Vuex.Store(Index)
-    })
 
 
-    it('should display welcome to the event when user has pressed the apply button', async () => {
+/* it('should display welcome to the event when user has pressed the apply button', async () => {
         window.alert = jest.fn();
 
         const wrapper = shallowMount(SignUp, {
@@ -81,5 +122,4 @@ describe('SignUp.vue', () => {
 
         const thanksMsg = wrapper.find('.msg')
         expect(thanksMsg).toBeTruthy()
-    })
-})
+    })*/

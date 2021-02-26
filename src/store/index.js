@@ -19,6 +19,7 @@ export default new Vuex.Store({
   },
   mutations: {
     showEvents(state, data) {
+      console.log('this is show events', data)
       state.events = data
     },
 
@@ -62,7 +63,9 @@ export default new Vuex.Store({
           events: ctx.state.events,
           user: value,
         }, options)
-        console.log('data', data)
+        console.log('data', data.data.data.events)
+        ctx.commit('showEvents', data.data.data.events)
+
       } catch (error) {
         console.log(error)
       }
@@ -83,7 +86,8 @@ export default new Vuex.Store({
           events: ctx.state.events,
         }, 
         options)
-        ctx.commit('showEvents', data.data.events)
+        console.log('where we are', data.data.data.events)
+        ctx.commit('showEvents', data.data.data.events)
       } catch (error) {
         console.log('error: ', error)
       }
@@ -114,7 +118,7 @@ export default new Vuex.Store({
         })
       }
       return ctx.filteredEvents
-    }
+    },
   },
   modules: {
   },

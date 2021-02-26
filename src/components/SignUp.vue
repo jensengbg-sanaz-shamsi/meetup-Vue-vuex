@@ -3,15 +3,15 @@
     <section v-show="registeringForm" class="form">
         <h3>Register for this event:</h3>
         <label for="email"></label>
-        <input type="text" placeholder="email" v-model="inputValue.email" class="input">
+        <input type="text" placeholder="email" v-model="inputValue.email" class="mailInput">
         <label for="name"></label>
-        <input type="text" v-model="inputValue.name" placeholder="name" class="input">
+        <input type="text" v-model="inputValue.name" placeholder="name" class="nameInput">
         <button @click="register" :disabled="isDisabled" class="join">Join</button>
     </section>
 
     <section v-show="confirmation" class="confirmationtext">
         <div v-show="feedback" class="confirmationTxt">
-            <h3>You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
+            <h3 class="msg">You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
             <p>P.S. we would appreciate if you put your opinion about this event later!</p>
             <textarea email="" id="" cols="50" rows="10" v-model="inputValue.comment">
             </textarea>
@@ -56,16 +56,22 @@ export default {
             } else {
                 this.confirmation = true;
                 this.registeringForm = false;
-                this.clearTextbox();
             }
         },
         post() {
             this.thanksMsg = true
             if (this.inputValue.comment >= 0) {
                 alert("You don´t write any comment");
-            } else {
+            } 
+            else {
                 let newComment = this.event.reviews;
+                /*let newUser = {
+                    comment: this.inputValue.comment,
+                    email: this.inputValue.email
+                }
+                console.log('new user', newUser)*/
                 newComment.push(this.inputValue);
+
                 this.$store.dispatch("sendComments", newComment);
                 this.clearTextbox();
                 this.feedback = false
@@ -111,7 +117,8 @@ export default {
         box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
         background-color: #ece3e3;
         width: 600px;
-        margin: 20px auto;
+        margin: 20px auto ;
+        margin-bottom: 0;
     }
 
     .confirmationTxt {
@@ -121,9 +128,10 @@ export default {
     .msg {
         margin: 20px 20px;
         color: rgb(105, 53, 53);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    .input {
+    .mailInput, .nameInput {
         padding: 0.5rem;
         margin: 20px;
         border: rgba(71, 66, 66, 0.507) solid 1px;

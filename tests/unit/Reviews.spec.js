@@ -16,7 +16,9 @@ describe('Reviews.vue', () => {
             actionClick: jest.fn(),
             actionInput: jest.fn()
         }
-        store = new Vuex.Store(Index)
+        store = new Vuex.Store({
+            actions
+        })
     })
 
     it('should display old comments when page mounted', () => {
@@ -35,7 +37,7 @@ describe('Reviews.vue', () => {
         const expectedEmail = 'sanaz@gmail.com'
         const expectedComment = 'it was great'
 
-        const actualEmail = wrapper.find('h3').text()
+        const actualEmail = wrapper.find('h5').text()
         const actualComment = wrapper.find('h4').text()
 
         expect(actualEmail).toContain(expectedEmail)

@@ -17,31 +17,12 @@ describe('AllMeetings.vue', () => {
             actionClick: jest.fn(),
             actionInput: jest.fn()
         }
-        store = new Vuex.Store(Index)
-    })
-
-    it('should display all meetup when mounted', () => {
-        
-        const wrapper = shallowMount(AllMeetings, {
-            propsData: {
-                events: [
-                    {
-                        "id": 1,
-                        "name": "Film festival",
-                        "date": "20 jan - 20 feb",
-                        "location": "online"
-                    },
-                ]
-            },
-            localVue,
-            store
+        store = new Vuex.Store({
+            actions
         })
-    
-        const eventExist = wrapper.findAll('.events').exists()
-        expect(eventExist).toBeTruthy()
     })
 
-    it('should display filtered events when typing in the inputfield', () => {
+    it('should filtered events when searching', () => {
         const filter = jest.spyOn(AllMeetings.methods, 'filter')
 
         const wrapper = shallowMount(AllMeetings, {

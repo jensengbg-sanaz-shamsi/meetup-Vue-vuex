@@ -73,6 +73,7 @@ h1, h5 {
 .about {
     position: absolute;
     left: 300px;
+    margin-right: 20px;
 }
 
 
