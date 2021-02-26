@@ -16,12 +16,6 @@
             </div>
         </section>
 
-        <footer>
-            <p>contact us</p>
-            <img src="./../assets/fb.jpg" alt="facebook" width="25px" height="25px"/>
-            <img src="./../assets/Logo-Twitter.jpg" alt="twitter" width="25px" height="25px"/>
-            <img src="./../assets/instagram.png" alt="instagram" width="25px" height="25px"/>
-        </footer>
     </main>
 </template>
 

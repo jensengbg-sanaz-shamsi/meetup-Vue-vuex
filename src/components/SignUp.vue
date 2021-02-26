@@ -13,7 +13,7 @@
         <div v-show="feedback">
             <h3>You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
             <p>P.S. we would appreciate if you put your opinion about this event later!</p>
-            <textarea name="" id="" cols="50" rows="10" v-model="inputValue.comment">
+            <textarea email="" id="" cols="50" rows="10" v-model="inputValue.comment">
             </textarea>
             <button @click="post" class="post">send</button>
         </div>
@@ -60,11 +60,11 @@ export default {
         post() {
             this.thanksMsg = true
             if (this.inputValue.comment >= 0) {
-                alert("You have not written a comment");
+                alert("You don´t write any comment");
             } else {
                 let newComment = this.event.reviews;
                 newComment.push(this.inputValue);
-                //this.$store.dispatch("postCommentToBackend", newComment);
+                this.$store.dispatch("sendComments", newComment);
                 this.clearTextbox();
                 this.feedback = false
             }
