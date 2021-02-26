@@ -32,6 +32,7 @@ export default {
 #app {
   max-width: 100vw;
   min-height: 100vh;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 ul {
   list-style-type: none;
@@ -53,7 +54,8 @@ li a {
 }
 
 li a:hover {
-  background-color: #111;
+  background-color: rgb(202, 177, 177);
+  color: #333;
 }
 
 </style>

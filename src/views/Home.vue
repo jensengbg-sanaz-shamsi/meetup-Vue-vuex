@@ -16,3 +16,14 @@ export default {
   }
 };
 </script>
+<style scoped>
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    color: rgb(114, 21, 40);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3rem;
+    margin: 20px 0;
+  }
+</style>

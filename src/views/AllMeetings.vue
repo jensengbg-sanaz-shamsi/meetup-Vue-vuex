@@ -3,6 +3,7 @@
 
         <section>
             <input
+                class="search"
                 type="text"
                 placeholder="Searching for title..."
                 v-model="search"
@@ -50,9 +51,19 @@ export default {
     flex-wrap: wrap;
 }
 
+.search {
+    height: 30px;
+    width: 300px;
+    display: flex;
+    margin: 20px auto;
+    box-shadow: 0 0 0px rgba(43, 41, 41, 0.623);;
+}
+
 .events {
     display: flex;
     flex-wrap: wrap;
 }
+
+
 
 </style>
