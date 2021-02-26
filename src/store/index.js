@@ -86,7 +86,7 @@ export default new Vuex.Store({
           events: ctx.state.events,
         }, 
         options)
-        console.log('where we are', data.data.data.events)
+        
         ctx.commit('showEvents', data.data.data.events)
       } catch (error) {
         console.log('error: ', error)

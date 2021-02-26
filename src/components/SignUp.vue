@@ -65,11 +65,6 @@ export default {
             } 
             else {
                 let newComment = this.event.reviews;
-                /*let newUser = {
-                    comment: this.inputValue.comment,
-                    email: this.inputValue.email
-                }
-                console.log('new user', newUser)*/
                 newComment.push(this.inputValue);
 
                 this.$store.dispatch("sendComments", newComment);
