@@ -8,7 +8,10 @@ export default new Vuex.Store({
   state: {
     apiUrl: "https://api.jsonbin.io/b/60379342f1be644b0a64db41",
     apiKey: "$2b$10$bKxupXCPzLuxYxBKsGZgx.v0iV82j039iZOI9bmNh.CjjQiiVxQEi",
-    events: Array,
+    events: {
+      type: Array,
+      default: []
+    },
     filteredEvents: Array,
     filter: {
       search: ''
@@ -87,6 +90,17 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    selectedEvent(state) {
+      return(eventId) => {
+        if(state.events.find) {
+          let eventSelected = state.events.find((event) => event.id == eventId)
+          return eventSelected
+        } else {
+          return {}
+        }
+      }
+    },
+
     filteredList(ctx) {
       if (
         ctx.filter.search == "" ||
@@ -100,12 +114,7 @@ export default new Vuex.Store({
         })
       }
       return ctx.filteredEvents
-    },
-    chosenEvent(state) {
-      return (eventId) => {
-        return state.events.find((event) => event.id == eventId)
-      }
-    },
+    }
   },
   modules: {
   },

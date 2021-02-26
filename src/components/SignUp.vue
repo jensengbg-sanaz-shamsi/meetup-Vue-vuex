@@ -10,14 +10,16 @@
     </section>
 
     <section v-show="confirmation" class="confirmationtext">
-        <div v-show="feedback">
+        <div v-show="feedback" class="confirmationTxt">
             <h3>You are registered for this event! We will send a confirmation and more details in your email adrdress!</h3>
             <p>P.S. we would appreciate if you put your opinion about this event later!</p>
             <textarea email="" id="" cols="50" rows="10" v-model="inputValue.comment">
             </textarea>
             <button @click="post" class="post">send</button>
         </div>
-        <h3 v-show="thanksMsg" class="msg">Thank you for your feedback!</h3>
+        <div class="thanksMsg">
+            <h3 v-show="thanksMsg" class="msg">Thank you for your feedback!</h3>
+        </div>
     </section>
 </main>
 
@@ -103,7 +105,7 @@ export default {
         box-sizing: border-box;
     }
 
-    .form, .confirmationtext {
+    .form, .confirmationTxt {
         height: 120px;
         border: 1px solid rgba(134, 209, 209, 0.329);
         box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
@@ -112,9 +114,14 @@ export default {
         margin: 20px auto;
     }
 
-    .confirmationtext {
+    .confirmationTxt {
         height: 350px;
     } 
+
+    .msg {
+        margin: 20px 20px;
+        color: rgb(105, 53, 53);
+    }
 
     .input {
         padding: 0.5rem;

@@ -23,28 +23,16 @@
 import Meetings from '@/components/Meetings'
 export default {
     name: "AllMeetings",
+        components: {
+        Meetings
+    },
     data() {
         return {
             search: ''
         }
     },
-    components: {
-        Meetings
-    },
     methods: {
         filter() {
-            /*if (
-                this.search == "undefined" ||
-                this.search == null ||
-                this.search == ""
-            ) {
-                let allEvents = this.$store.getters['events'];
-                this.filteredList = allEvents;
-            } else {
-                this.filteredList = this.$store.state.events.filter((event) => {
-                    return event.name.toLowerCase().includes(this.search.toLowerCase());
-                });
-            }*/
             this.$store.dispatch('filterSearch',  this.search)
         }
     },
@@ -52,9 +40,6 @@ export default {
         filteredList() {
             return this.$store.getters['filteredList']
         }
-    },
-    beforeMount() {
-        this.filter()
     }
 }
 </script>

@@ -4,16 +4,16 @@
         <section class="info">
             <div class="detail">
                 <div class="details">
-                    <img :src="event.imgUrl" alt="bild" class="img"/>
-                    <h1 class="title">{{ event.name }}</h1>
-                    <h5>Location: {{ event.location }}</h5>
-                    <h5>Date: {{ event.date }}</h5>
-                    <h5>time: {{ event.timeIn }} - {{ event.timeOut }}</h5>
-                    <h5>Price: {{ event.price }}</h5>
+                    <img :src="event.imgUrl  || 'No title available' " alt="bild" class="img" />
+                    <h1 class="title">{{ event.name || 'No title available'}}</h1>
+                    <h5>Location: {{ event.location || 'No location available'}}</h5>
+                    <h5>Date: {{ event.date || 'No date available'}}</h5>
+                    <h5>time: {{ event.timeIn || 'No detail available'}} - {{ event.timeOut || 'No detail available'}}</h5>
+                    <h5>Price: {{ event.price || 'No price available'}}</h5>
                 </div>
                 <div class="about">
                     <h2>About this event:</h2>
-                    <p>{{ event.discription }}</p>
+                    <p>{{ event.discription || 'No description available' }}</p>
                 </div>
             </div>
             <SignUp :event="event"/>
@@ -31,26 +31,8 @@ export default {
         Reviews
     },
     computed: {
-        /*event() {
-            let eventInfo = {
-                name: this.infoChosen ? this.infoChosen.name : "No title available",
-                imgUrl: this.infoChosen ? this.infoChosen.imgUrl : "No image available",
-                discription: this.infoChosen ? this.infoChosen.discription : "No description available",
-                date: this.infoChosen ? this.infoChosen.date : "No date available",
-                location: this.infoChosen ? this.infoChosen.location : "No location available",
-                price: this.infoChosen ? this.infoChosen.price : "no price available",
-            };
-            return eventInfo;
-        },
-        infoChosen() {
-            if (this.$route !== undefined) {
-                return this.events.find( (event) => event.id == this.$route.params.id);
-            } else {
-                return null;
-            }
-        }*/
         event() {
-            return this.$store.getters.chosenEvent(this.$route.params.id)
+            return this.$store.getters.selectedEvent(this.$route.params.id)
         },
     },
 };
