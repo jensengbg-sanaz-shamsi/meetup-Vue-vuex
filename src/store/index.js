@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiUrl: "https://api.jsonbin.io/b/60379342f1be644b0a64db41",
+    apiUrl: "https://api.jsonbin.io/v3/b/603a435c0866664b10847518",
     apiKey: "$2b$10$bKxupXCPzLuxYxBKsGZgx.v0iV82j039iZOI9bmNh.CjjQiiVxQEi",
     events: {
       type: Array,
@@ -39,7 +39,7 @@ export default new Vuex.Store({
         }
       }
       ax.get(`${ctx.state.apiUrl}`, options).then(data => {
-        ctx.commit('showEvents', data.data.events)
+        ctx.commit('showEvents', data.data.record.events)
       })
 
     },
@@ -64,7 +64,7 @@ export default new Vuex.Store({
           user: value,
         }, options)
         console.log('data', data.data.data.events)
-        ctx.commit('showEvents', data.data.data.events)
+        ctx.commit('showEvents', data.data.record.events)
 
       } catch (error) {
         console.log(error)
@@ -84,10 +84,10 @@ export default new Vuex.Store({
       try {
         let data = await ax.put(`${ctx.state.apiUrl}`, {
           events: ctx.state.events,
-        }, 
-        options)
-        
-        ctx.commit('showEvents', data.data.data.events)
+        },
+        options);
+        console.log('dataaaaaaa',data)
+        ctx.commit('showEvents', data.data.record.events);
       } catch (error) {
         console.log('error: ', error)
       }

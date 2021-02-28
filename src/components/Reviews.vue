@@ -1,7 +1,7 @@
 <template>
     <section id="comments">
-        <h5>from: {{ reviews.email }}</h5>
-        <h4>{{ reviews.comment }}</h4>
+        <h5>from: {{ review.email }}</h5>
+        <h4>{{ review.comment }}</h4>
     </section>
 </template>
 
@@ -17,7 +17,6 @@ export default {
                 comment: this.review.comment
             }
             return newComment
-            
         }
     }
 }

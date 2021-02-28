@@ -64,22 +64,21 @@ export default {
                 alert("You don´t write any comment");
             } 
             else {
-                let newComment = this.event.reviews;
-                newComment.push(this.inputValue);
-
-                this.$store.dispatch("sendComments", newComment);
-                this.clearTextbox();
+                let comments = this.event.reviews;
+                comments.push(this.inputValue);
+                this.$store.dispatch("sendComments", comments);
+                //this.clearTextbox();
                 this.feedback = false
             }
         },
-        clearTextbox() {
+        /*clearTextbox() {
             let newText = {
                 email: "",
                 comment: ""
             }
             this.inputValue = newText
             return this.inputValue
-            }
+            }*/
     },
     computed: {
         isDisabled() {
