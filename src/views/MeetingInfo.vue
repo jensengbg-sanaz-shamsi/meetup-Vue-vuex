@@ -45,7 +45,7 @@ export default {
 }
 
 .info {
-    height: 300px;
+    height: 330px;
     border: 1px solid rgba(134, 209, 209, 0.329);
     box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
     background-color: #ece3e3;
@@ -58,11 +58,9 @@ export default {
     flex-direction: row;
     width: 100%;
     height: 100%;
-    position: relative;
 }
 
 .details {
-    position: absolute;
     margin: 0;
 }
 
@@ -71,7 +69,6 @@ h1, h5 {
 }
 
 .about {
-    position: absolute;
     left: 300px;
     margin-right: 20px;
 }
@@ -97,6 +94,42 @@ h2 {
 }
 p {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+    .detail {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .info {
+        height: 580px;
+        border: 1px solid rgba(134, 209, 209, 0.329);
+        box-shadow: 0 0 7px rgba(43, 41, 41, 0.623);
+        background-color: #ece3e3;
+        width: 300px;
+        margin: 20px auto;
+    }
+
+    .about {
+        margin-left: 20px;
+    }
+    
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 90%;
+    }
+
+    .img {
+        margin: 20px 20px;
+    }
 }
 
 </style>

@@ -149,4 +149,31 @@ export default {
         height: 200px;
         margin-left: 20px ;
     }
+
+    @media only screen and (max-width: 600px) {
+        .form, .confirmationTxt {
+            width: 300px;
+            height: 280px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .join {
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        textarea {
+            width: 200px;
+            height: 200px;
+        }
+
+        .confirmationTxt {
+            width: 300px;
+            height: 450px;
+        }
+    }
 </style>
